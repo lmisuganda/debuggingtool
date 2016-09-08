@@ -2,7 +2,7 @@ eventData = [];
 
 function getAllPrograms(){
     return $.ajax({
-        url: "http://192.168.10.103:8082/api/programs.jsonp?paging=false&",
+        url: "/api/programs.jsonp?paging=false&",
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -21,7 +21,7 @@ function getAllPrograms(){
 }
 function getGeneralProgramInfo(programId, filter) {
     return $.ajax({
-        url: 'http://192.168.10.103:8082/api/programs/' + programId + '.jsonp',
+        url: '/api/programs/' + programId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -59,7 +59,7 @@ function getGeneralProgramInfo(programId, filter) {
 }
 function getEnteredProgramData(programId, filter) {
     return $.ajax({
-        url: 'http://192.168.10.103:8082/api/events.jsonp?program=' + programId + '&paging=false&' + filter,
+        url: '/api/events.jsonp?program=' + programId + '&paging=false&' + filter,
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -94,7 +94,7 @@ function getEnteredProgramData(programId, filter) {
 
 function getProgramStageInfoFromInstance(programStageId, stageNr){
     return $.ajax({
-        url: 'http://192.168.10.103:8082/api/programStages/' + programStageId + '.jsonp',
+        url: '/api/programStages/' + programStageId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -132,7 +132,7 @@ function getProgramStageInfoFromInstance(programStageId, stageNr){
 
 function extractDataElementId(programDataElementId, idx){
     return $.ajax({
-        url: 'http://192.168.10.103:8082/api/programStageDataElements/' + programDataElementId + '.jsonp?fields=dataElement',
+        url: '/api/programStageDataElements/' + programDataElementId + '.jsonp?fields=dataElement',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -149,7 +149,7 @@ function extractDataElementId(programDataElementId, idx){
 
 function getDataElementInformation(dataElementId, idx){
     return $.ajax({
-        url: 'http://192.168.10.103:8082/api/dataElements/' + dataElementId + '.jsonp',
+        url: '/api/dataElements/' + dataElementId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -194,7 +194,7 @@ function getProgramStageInfo() {
 function sendTestData(jsonObject) {
     return $.ajax({
         data: JSON.stringify(jsonObject),
-        url: "http://192.168.10.102:8082/api/events",
+        url: "/api/events",
         type: 'POST',
         dataType: 'json',
         contentType:'application/json',

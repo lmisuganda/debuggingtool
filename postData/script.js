@@ -19,7 +19,7 @@ function createPostEvent(programId, orgUnitId, val1, val2){
 function sendDataToServer(jsonObject) {
     return $.ajax({
         data: JSON.stringify(jsonObject),
-        url: "http://192.168.10.103:8082/api/events",
+        url: "/api/events",
         type: 'POST',
         dataType: 'json',
         contentType:'application/json',
