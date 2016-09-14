@@ -1,11 +1,11 @@
 
 
-#eventdata, #programinfo, .eventdatafields, #programstagesinfolist, #program_stages_info{
+#eventdata, #programinfo, .eventdatafields, #programstagesinfolist, [id^="program_stages_info"]{
 	margin:2% 0 0 0;
 	list-style: none;
 }
 
-.eventdatafields, #program_stages_info{
+.eventdatafields, [id^="program_stages_info"]{
 	background-color: darkgreen;
 	display: inline-block;
 	width: 20%;
@@ -14,7 +14,7 @@
 	text-align: left;
 }
 
-#program_stages_info{
+[id^="program_stages_info"]{
 	width:40%;
 }
 

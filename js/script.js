@@ -11,7 +11,6 @@ function getAllPrograms(){
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-            console.log("2", data)
             data.programs.map((val, idx) => {
                 $('#program_selector').append( '<option id="' + val.id + '">' + val.displayName + '</option>' );
             })
@@ -68,8 +67,6 @@ function getEnteredProgramData(programId, filter) {
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-
-            console.log("2", data.events)
             data.events.map( (event, idx) => {
                 var str = '<ul class="eventdatafields" id="' + idx + '">';
                 str += '<li> EVENT NR ' + (idx+1) + ' </li>';
@@ -103,16 +100,15 @@ function getProgramStageInfoFromInstance(programStageId, stageNr){
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-            console.log("666", data)
-
-            var str = '<ul id="program_stages_info">';
+            var str = '<ul id="program_stages_info'+ stageNr +'">';
+            console.log("1", stageNr)
             str += '<li> STAGE NR ' + stageNr + ' </li>';
             str += '<li> ---------------- </li>';
             str += liElement('Name', data.name);
             str += liElement('Displayed name', data.displayName);
             str += liElement('Description', data.description);
             str += liElement('Connected to program', data.program.id);
-            str += liElement('Id', data.completedBy);
+            str += liElement('Id', data.id);
             str += liElement('URI', data.href);
 
             programStageDataElementIds = [];
@@ -123,14 +119,14 @@ function getProgramStageInfoFromInstance(programStageId, stageNr){
             data.programStageSections.map((programStageSection, idx) =>{
                     str += '<li> programStageSection' + (idx+1) + ': ' + programStageSection.id + '</li>';
             })
-            console.log("programStageDataElementIds", programStageDataElementIds);
             $('#programstagesinfolist').append(str);
-            extractEachDataElementId(programStageDataElementIds);
+            extractEachDataElementId(programStageDataElementIds, stageNr)
+
         }
     });
 }
 
-function extractDataElementId(programDataElementId, idx){
+function extractDataElementId(programDataElementId, idx, stageNr){
     return $.ajax({
         url: '/api/programStageDataElements/' + programDataElementId + '.jsonp?fields=dataElement',
         type: 'GET',
@@ -142,12 +138,12 @@ function extractDataElementId(programDataElementId, idx){
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-            getDataElementInformation(data.dataElement.id, idx)
+            getDataElementInformation(data.dataElement.id, idx, stageNr)
         }
     });
 }
 
-function getDataElementInformation(dataElementId, idx){
+function getDataElementInformation(dataElementId, idx, stageNr){
     return $.ajax({
         url: '/api/dataElements/' + dataElementId + '.jsonp',
         type: 'GET',
@@ -158,9 +154,7 @@ function getDataElementInformation(dataElementId, idx){
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-            console.log("MAgnus Li", data);
-
-            var str = '<li> DATA ELEMENT NR.' + idx + '</li>'
+            var str = '<li> DATA ELEMENT </li>'
             str += '<ul>'
             str += liElement('Display Name', data.displayName);
             str += liElement('Value type', data.valueType);
@@ -173,20 +167,18 @@ function getDataElementInformation(dataElementId, idx){
 
             str += '</ul>';
 
-            $('#program_stages_info').append(str)
+            $('#program_stages_info'+stageNr).append(str)
         }
     });
 }
 
-function extractEachDataElementId(programStageDataElementIds){
-    console.log("programStageDataElementIds INNI LITEN FUNKSJON: " , programStageDataElementIds)
+function extractEachDataElementId(programStageDataElementIds, stageNr){
     programStageDataElementIds.map( (programDataElementId, idx) =>{
-        extractDataElementId(programDataElementId, (idx+1));
+        extractDataElementId(programDataElementId, (idx+1), stageNr);
     });
 }
 
 function getProgramStageInfo() {
-    console.log("EveentData: " , eventData.programStages)
     eventData.programStages.map( (val, idx) =>{
         getProgramStageInfoFromInstance(val.id, (idx+1));
     });
@@ -203,30 +195,9 @@ function sendTestData(jsonObject) {
             console.log(JSON.stringify(data));
         },
         success: function (data) {
-            console.log("3", data)
         }
     });
 }
-
-function createPostEvent(programId, orgUnitId, username, status, allDataElementObjects){
-    var jsn = {
-      "program": "xemNskRTf8M", // param=programId
-      "orgUnit": "xZDHHbT4oCq", // param=orgUnitId
-      "eventDate": "2015-05-17", // TODAYS DATE
-      "status": "COMPLETED", // param=status
-      "storedBy": "admin", // param=username
-      //"coordinate": {
-        //"latitude": 59.8,
-        //"longitude": 10.9
-      //},
-      "dataValues": [ // param=allDataElementObjects
-        { "dataElement": "fGE84loiXrv", "value": "666" },
-        { "dataElement": "h9VbvV6vW6h", "value": "666" }
-      ]
-    };
-
-}
-
 
 function displaySexyDate(notSexyDate){
     return notSexyDate.substring(0,notSexyDate.length-18);
@@ -242,14 +213,14 @@ function renderWebpage(){
 
     $('#eventdata').text('');
     $('#programinfo').text('');
-    $('#program_stages_info').remove();
+    for (var i = 0; i < 100; i++){ // forelopig hatløsning
+        $('#program_stages_info'+i).remove();
+    }
     extractedProgramId = $('#program_selector option:selected').attr('id');
-    var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'xemNskRTf8M' : extractedProgramId;
+    var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'JPcaT8NPR7Y' : extractedProgramId;
 
     extractedFilter = $('#filter_selector option:selected').val();
     var filter = (extractedFilter == "Choose Filter Options" || extractedFilter == undefined) ? 'paging=false' : extractedFilter;
-    console.log("Filter", filter,"Extracted" , extractedFilter);
-    console.log("programId", programId,"extractedProgramId" , extractedProgramId);
 
     getGeneralProgramInfo( programId, filter );
     getEnteredProgramData( programId, filter );
