@@ -217,7 +217,7 @@ function renderWebpage(){
         $('#program_stages_info'+i).remove();
     }
     extractedProgramId = $('#program_selector option:selected').attr('id');
-    var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'JPcaT8NPR7Y' : extractedProgramId;
+    var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'VeKFkhMK5H0' : extractedProgramId;
 
     extractedFilter = $('#filter_selector option:selected').val();
     var filter = (extractedFilter == "Choose Filter Options" || extractedFilter == undefined) ? 'paging=false' : extractedFilter;
