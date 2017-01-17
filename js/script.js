@@ -2,7 +2,7 @@ eventData = [];
 
 function getAllPrograms(){
     return $.ajax({
-        url: "/api/programs.jsonp?paging=false&",
+        url: "/dhis/api/programs.jsonp?paging=false&",
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -20,7 +20,7 @@ function getAllPrograms(){
 }
 function getGeneralProgramInfo(programId, filter) {
     return $.ajax({
-        url: '/api/programs/' + programId + '.jsonp',
+        url: '/dhis/api/programs/' + programId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -58,7 +58,7 @@ function getGeneralProgramInfo(programId, filter) {
 }
 function getEnteredProgramData(programId, filter) {
     return $.ajax({
-        url: '/api/events.jsonp?program=' + programId + '&paging=false&' + filter,
+        url: '/dhis/api/events.jsonp?program=' + programId + '&paging=false&' + filter,
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -91,7 +91,7 @@ function getEnteredProgramData(programId, filter) {
 
 function getProgramStageInfoFromInstance(programStageId, stageNr){
     return $.ajax({
-        url: '/api/programStages/' + programStageId + '.jsonp',
+        url: '/dhis/api/programStages/' + programStageId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -128,7 +128,7 @@ function getProgramStageInfoFromInstance(programStageId, stageNr){
 
 function extractDataElementId(programDataElementId, idx, stageNr){
     return $.ajax({
-        url: '/api/programStageDataElements/' + programDataElementId + '.jsonp?fields=dataElement',
+        url: '/dhis/api/programStageDataElements/' + programDataElementId + '.jsonp?fields=dataElement',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -145,7 +145,7 @@ function extractDataElementId(programDataElementId, idx, stageNr){
 
 function getDataElementInformation(dataElementId, idx, stageNr){
     return $.ajax({
-        url: '/api/dataElements/' + dataElementId + '.jsonp',
+        url: '/dhis/api/dataElements/' + dataElementId + '.jsonp',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
@@ -186,7 +186,7 @@ function getProgramStageInfo() {
 function sendTestData(jsonObject) {
     return $.ajax({
         data: JSON.stringify(jsonObject),
-        url: "/api/events",
+        url: "/dhis/api/events",
         type: 'POST',
         dataType: 'json',
         contentType:'application/json',

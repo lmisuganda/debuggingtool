@@ -5,7 +5,7 @@ function createPostEvent(programId, orgUnitId, vals){
       "program": programId, // param=programId
       "programStage":'vatbHR3vK9N',
       "orgUnit": orgUnitId, // param=orgUnitId
-      "eventDate": "2015-05-17", // TODAYS DATE
+      "eventDate": "2017-01-17", // TODAYS DATE
       "status": "COMPLETED", // param=status
       "storedBy": "admin", // param=username
     //   "enrollment": "kgZuK9M72bj",
@@ -310,7 +310,7 @@ function createPostEvent(programId, orgUnitId, vals){
 function sendDataToServer(jsonObject) {
     return $.ajax({
         data: JSON.stringify(jsonObject),
-        url: "/api/events",
+        url: "/dhis/api/events",
         type: 'POST',
         dataType: 'json',
         contentType:'application/json',
@@ -327,7 +327,7 @@ function sendDataToServer(jsonObject) {
 // Below function temporarly a duplicate of the one in debugger-app
 function getDataElementInformation(dataElementId, idx){
     return $.ajax({
-        url: '/api/dataElements/' + dataElementId + '.jsonp?paging=false',
+        url: '/dhis/api/dataElements/' + dataElementId + '.jsonp?paging=false',
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/jsonp',
