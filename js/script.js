@@ -205,7 +205,7 @@ function renderWebpage(){
     var filter = (extractedFilter == "Choose Filter Options" || extractedFilter == undefined) ? 'paging=false' : extractedFilter;
 
     if (extractedProgramId){
-        var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'VeKFkhMK5H0' : extractedProgramId;
+        var programId = extractedProgramId;
         getGeneralProgramInfo( programId, filter );
         getEnteredProgramData( programId, filter );
     }
