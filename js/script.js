@@ -183,21 +183,6 @@ function getProgramStageInfo() {
         getProgramStageInfoFromInstance(val.id, (idx+1));
     });
 }
-function sendTestData(jsonObject) {
-    return $.ajax({
-        data: JSON.stringify(jsonObject),
-        url: "/dhis/api/events",
-        type: 'POST',
-        dataType: 'json',
-        contentType:'application/json',
-        authorization: "Bearer 7fa34aca-a5ba-485b-b108-b18faad54c6d",
-        error: function (data) {
-            console.log(JSON.stringify(data));
-        },
-        success: function (data) {
-        }
-    });
-}
 
 function displaySexyDate(notSexyDate){
     return notSexyDate.substring(0,notSexyDate.length-18);
@@ -208,7 +193,6 @@ function liElement(id, val){
 }
 
 
-// sendTestData(jsn);
 function renderWebpage(){
 
     $('#eventdata').text('');
@@ -217,13 +201,14 @@ function renderWebpage(){
         $('#program_stages_info'+i).remove();
     }
     extractedProgramId = $('#program_selector option:selected').attr('id');
-    var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'VeKFkhMK5H0' : extractedProgramId;
-
     extractedFilter = $('#filter_selector option:selected').val();
     var filter = (extractedFilter == "Choose Filter Options" || extractedFilter == undefined) ? 'paging=false' : extractedFilter;
 
-    getGeneralProgramInfo( programId, filter );
-    getEnteredProgramData( programId, filter );
+    if (extractedProgramId){
+        var programId = (extractedProgramId == "" || extractedProgramId == undefined ) ? 'VeKFkhMK5H0' : extractedProgramId;
+        getGeneralProgramInfo( programId, filter );
+        getEnteredProgramData( programId, filter );
+    }
 }
 
 
@@ -237,3 +222,6 @@ $( "#filter_selector" ).change(function() {
 
 getAllPrograms();
 renderWebpage();
+
+
+// https://lmis-dev.dhis2.org/dhis/api/programs.jsonp?filter=displayName:eq:ARV_Program
