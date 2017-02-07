@@ -224,6 +224,3 @@ $( "#filter_selector" ).change(function() {
 $(document).ready(function(){
     getAllPrograms().then(renderWebpage);
 });
-
-
-// https://lmis-dev.dhis2.org/dhis/api/programs.jsonp?filter=displayName:eq:ARV_Program
