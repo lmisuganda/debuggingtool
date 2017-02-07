@@ -220,8 +220,10 @@ $( "#filter_selector" ).change(function() {
     renderWebpage();
 });
 
-getAllPrograms();
-renderWebpage();
+$(document).ready(function(){
+    getAllPrograms();
+    renderWebpage();
+});
 
 
 // https://lmis-dev.dhis2.org/dhis/api/programs.jsonp?filter=displayName:eq:ARV_Program
