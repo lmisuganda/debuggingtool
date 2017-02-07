@@ -54,7 +54,6 @@ function addRowsForEachDataElement(data_elements){
 function createDataElementInputFields(raw_data){
     data_elements = raw_data.dataElements;
     array_of_IDs_for_data_elements = createArrayOfRelevantDataElementIDs(data_elements)
-    console.log(array_of_IDs_for_data_elements)
     NUMBER_OF_DATA_ELEMENTS = array_of_IDs_for_data_elements.length;
     addRowsForEachDataElement(data_elements);
     randomize_data_element_numbers(NUMBER_OF_DATA_ELEMENTS, MAX_VALUE_FOR_RANDOM_NUMBERS)
@@ -126,6 +125,7 @@ function sendSingleEvent(){
         value_array.push($('#dataelem' + i).val());
     }
     var jsn = createPostEvent(program, programStage, orgunit, array_of_IDs_for_data_elements, value_array);
+    console.log(jsn)
     sendDataToServer(jsn);
 }
 
