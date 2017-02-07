@@ -194,13 +194,14 @@ function liElement(id, val){
 
 
 function renderWebpage(){
-
+    console.log("inside renderWebpage")
     $('#eventdata').text('');
     $('#programinfo').text('');
     for (var i = 0; i < 100; i++){ // forelopig hatløsning
         $('#program_stages_info'+i).remove();
     }
     extractedProgramId = $('#program_selector option:selected').attr('id');
+    console.log("extractedProgramId", extractedProgramId)
     extractedFilter = $('#filter_selector option:selected').val();
     var filter = (extractedFilter == "Choose Filter Options" || extractedFilter == undefined) ? 'paging=false' : extractedFilter;
 
@@ -221,8 +222,7 @@ $( "#filter_selector" ).change(function() {
 });
 
 $(document).ready(function(){
-    getAllPrograms();
-    renderWebpage();
+    getAllPrograms().then(renderWebpage);
 });
 
 
