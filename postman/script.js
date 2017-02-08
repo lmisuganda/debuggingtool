@@ -95,9 +95,9 @@ function createPostEvent(programId, programStage, orgUnitId, data_element_ids, d
     post_obj.storedBy = 'admin';
     post_obj.orgUnit = orgUnitId;
     post_obj.dataValues = createDataValuesArray(data_element_ids, data_element_values)
-    return post_obj;
     // post_obj.enrollment = "xxxxxxxx";
     // post_obj.trackedEntityInstance = "xxxxxxxx";
+    return post_obj;
 }
 
 function sendDataToServer(jsonObject) {
